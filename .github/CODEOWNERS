@@ -1,0 +1,16 @@
+#Default owner for anything not matched below
+*                                @shashi913
+
+#Application code
+/app/                            @daveshenal
+/tests/                          @daveshenal
+
+#CI/CD, Docker, infrastructure
+/.github/workflows/              @
+/Dockerfile                      @
+/terraform/                      @
+/infra/                          @
+
+#Documentation
+/*.md                            @GayanaOW
+/docs/                           @GayanaOW
