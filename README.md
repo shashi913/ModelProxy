@@ -36,3 +36,6 @@ See [CONTRIBUTING.md](./CONTRIBUTING.md).
 
 ## License
 See [LICENSE](./LICENSE).
+
+## Author
+Maintained by [@shashi913](https://github.com/shashi913)
