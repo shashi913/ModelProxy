@@ -6,10 +6,10 @@
 /tests/                          @daveshenal
 
 #CI/CD, Docker, infrastructure
-/.github/workflows/              @
-/Dockerfile                      @
-/terraform/                      @
-/infra/                          @
+/.github/workflows/              @daveshenal
+/Dockerfile                      @daveshenal
+/terraform/                      @daveshenal
+/infra/                          @daveshenal
 
 #Documentation
 /*.md                            @GayanaOW
