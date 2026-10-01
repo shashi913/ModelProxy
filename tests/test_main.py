@@ -21,3 +21,11 @@ def test_generate_endpoint():
         response = client.post("/generate", json={"prompt": "Say hi"})
     assert response.status_code == 200
     assert response.json() == {"response": "Hello there!"}
+
+def test_generate_with_groq_provider(monkeypatch):
+    monkeypatch.setenv("LLM_PROVIDER", "groq")
+    fake_response = "Hi from Groq!"
+    with patch("app.llm_client._generate_with_groq", return_value=fake_response):
+        from app.llm_client import generate_response
+        result = generate_response("Say hi")
+    assert result == "Hi from Groq!"
