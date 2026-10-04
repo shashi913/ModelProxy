@@ -1,0 +1,40 @@
+{
+    "family": "modelproxy-task",
+    "networkMode": "awsvpc",
+    "requiresCompatibilities": ["FARGATE"],
+    "cpu": "256",
+    "memory": "512",
+    "executionRoleArn": "arn:aws:iam::203918878190:role/modelproxy-ecs-execution-role",
+    "containerDefinitions": [
+      {
+        "name": "modelproxy",
+        "image": "203918878190.dkr.ecr.us-east-1.amazonaws.com/modelproxy:latest",
+        "portMappings": [
+          {
+            "containerPort": 8000,
+            "protocol": "tcp"
+          }
+        ],
+        "environment": [
+          {
+            "name": "LLM_PROVIDER",
+            "value": "groq"
+          }
+        ],
+        "secrets": [
+          {
+            "name": "GROQ_API_KEY",
+            "valueFrom": "arn:aws:secretsmanager:us-east-1:203918878190:secret:modelproxy/groq-api-key-ZuTU6i"
+          }
+        ],
+        "logConfiguration": {
+          "logDriver": "awslogs",
+          "options": {
+            "awslogs-group": "/ecs/modelproxy",
+            "awslogs-region": "us-east-1",
+            "awslogs-stream-prefix": "ecs"
+          }
+        }
+      }
+    ]
+  }

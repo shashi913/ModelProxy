@@ -24,12 +24,12 @@ uvicorn app.main:app --reload
 ```
 
 ## Roadmap
-- [ ] Build FastAPI service with LLM integration
-- [ ] Containerize with Docker
-- [ ] Push image to AWS ECR
-- [ ] Automate build/test/push with GitHub Actions
-- [ ] Deploy to ECS Fargate
-- [ ] Add CloudWatch logging + health checks
+- [x] Build FastAPI service with LLM integration
+- [x] Containerize with Docker
+- [x] Push image to AWS ECR
+- [x] Automate build/test/push with GitHub Actions
+- [x] Deploy to ECS Fargate
+- [x] Add CloudWatch logging + health checks
 
 ## Contributing
 See [CONTRIBUTING.md](./CONTRIBUTING.md).
@@ -39,3 +39,23 @@ See [LICENSE](./LICENSE).
 
 ## Author
 Maintained by [@shashi913](https://github.com/shashi913)
+
+## Deployment
+
+This app is deployed to AWS ECS Fargate, pulling its image from a private ECR repository.
+
+### Architecture
+- **ECR** — stores the built Docker image
+- **ECS Fargate** — runs the container, no server management required
+- **Secrets Manager** — stores the Groq API key, injected into the container at runtime
+- **CloudWatch Logs** — captures container output for monitoring
+
+### Deploying
+1. Build and push the image: see `Dockerfile`
+2. Task definition: `deploy/task-definition.json`
+3. Scale the service up/down:
+```bash
+   aws ecs update-service --cluster modelproxy-cluster --service modelproxy-service --desired-count 1 --region us-east-1
+```
+
+**Note:** the service is scaled to 0 by default to avoid ongoing costs. Scale up before demoing.
